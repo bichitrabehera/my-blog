@@ -1,0 +1,33 @@
+<div class="author">
+    <h1 class="author__heading">Hey,I am Bichitra Behera</h1>
+    <p>A Web Developer</p>
+</div>
+
+<img src="https://images.unsplash.com/photo-1490750967868-88aa4486c946?w=400&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fGZsb3dlcnxlbnwwfHwwfHx8MA%3D%3D"
+    alt="Hero image" class="hero-image" width="400" height="200" style="opacity: 0.8;"/>
+
+    <q>If you can't be a flower, don't be the thorn that hurts—be the leaf that shelters or the root that supports.</q>
+<section class="articles">
+    <h2>Latest Posts</h2>
+
+    <ul class="articles-ul">
+        <% data.forEach(post=> { %>
+            <li>
+                <a href="/post/<%= post._id %>">
+                    <span>
+                        <%= post.title %>
+                    </span>
+                    <span class="articles-list_date">
+                        <%= post.createdAt.toDateString() %>
+                    </span>
+                </a>
+            </li>
+            <% }); %>
+    </ul>
+
+    <% if (nextPage!==null) { %>
+
+        <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+        <% } %>
+
+</section>
