@@ -19,7 +19,7 @@ body {
     text-align: center;
 }
 
-a{
+a {
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
@@ -104,20 +104,20 @@ a{
     cursor: pointer;
 }
 
-.header_button button{
+.header_button button {
     padding: 10px;
     background-color: #1b89ff;
-    color:white;
+    color: white;
     border: none;
     border-radius: 50px;
 }
 
-.header_button button i{
+.header_button button i {
     font-size: 20px;
     padding: 10px;
 }
 
-.search__form{
+.search__form {
     padding: 0;
 }
 
@@ -142,6 +142,8 @@ a{
     color: #000000;
 }
 
+
+
 /* ==================== */
 /* HERO IMAGE */
 /* ==================== */
@@ -164,9 +166,9 @@ h1 {
     text-align: center;
     color: #333;
     margin-bottom: 1rem;
-  }
-  
-  .article {
+}
+
+.article {
     max-width: 600px;
     margin: 0 auto;
     padding: 1.5rem;
@@ -177,8 +179,8 @@ h1 {
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
-  }
-  
+}
+
 
 /* ==================== */
 /* ARTICLES SECTION */
@@ -279,7 +281,7 @@ h1 {
     animation: fadeInUp 1s ease-in-out;
 }
 
-.profile-header img{
+.profile-header img {
     height: 200px;
     width: 200px;
     border-bottom-left-radius: 30px;
@@ -298,7 +300,9 @@ main {
     gap: 20px;
     /* padding: 30px; */
     padding-bottom: 50px;
-    flex: 1; /* Pushes footer to the bottom when content is short */
+    flex: 1;
+    /* Pushes footer to the bottom when content is short */
+    margin-top: 0;
 
 }
 
@@ -311,17 +315,17 @@ section {
     animation: fadeIn 1s ease-in-out;
 }
 
-.social-list{
+.social-list {
     display: flex;
     justify-content: center;
     gap: 30px;
 }
 
-.social-list a{
+.social-list a {
     text-decoration: none;
 }
 
-.social-list a i{
+.social-list a i {
     font-size: 30px;
     color: #0073e6;
     transition: transform 0.3s ease-in-out;
@@ -400,7 +404,8 @@ ul {
     align-items: center;
     width: 40px;
     height: 40px;
-    background: #0073e6; /* Primary Blue */
+    background: #0073e6;
+    /* Primary Blue */
     color: white;
     font-size: 22px;
     border-radius: 50%;
@@ -483,9 +488,6 @@ ul {
     padding: 0;
     margin: 0;
 }
-
-
-
 .admin-post-controls form {
     display: inline-block;
 }
@@ -509,17 +511,19 @@ ul {
 
 
 
-.addpost{
+.addpost {
     background: white;
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 600px;
+    max-width: 600px;
+    min-width: 300px;
     text-align: left;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
+
 /* ==================== */
 /* ADMIN SIGN-IN FORM */
 /* ==================== */
@@ -529,7 +533,7 @@ ul {
     padding: 30px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 600px;
+    max-width: 600px;
     text-align: left;
     margin: 0 auto;
 }
@@ -655,5 +659,190 @@ input[type="password"]:focus {
     .skill-list span {
         font-size: 12px;
         padding: 8px 12px;
+    }
+}
+
+
+/* ==================== */
+/* RESPONSIVE DESIGN */
+/* ==================== */
+
+/* For screens smaller than 1200px (e.g., tablets) */
+@media (max-width: 1200px) {
+    .header {
+        padding: 10px 50px;
+    }
+
+    .author {
+        max-width: 90%;
+    }
+
+    .articles {
+        width: 100%;
+    }
+
+    .profile-header {
+        padding: 40px 15px;
+    }
+
+    .profile-header h1 {
+        font-size: 32px;
+    }
+
+    .profile-header img {
+        height: 150px;
+        width: 150px;
+    }
+
+    main {
+        width: 95%;
+    }
+}
+
+/* For screens smaller than 768px (e.g., small tablets and large phones) */
+@media (max-width: 768px) {
+
+    .addpost {
+        width: 320px;
+    }
+    
+    .header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        text-align: center;
+        padding: 10px 20px;
+    }
+
+    .nav ul {
+        flex-direction: row;
+        gap: 10px;
+        padding: 10px 0;
+    }
+
+    .header_button {
+        margin-top: 10px;
+    }
+
+    .author__heading {
+        font-size: 28px;
+    }
+
+    .author p {
+        font-size: 1.2rem;
+    }
+
+    .articles-ul li a {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 30px 15px;
+        border-radius: 0 0 30px 30px;
+    }
+
+    .profile-header h1 {
+        font-size: 28px;
+    }
+
+    .profile-header img {
+        margin-top: 20px;
+    }
+
+    main {
+        width: 100%;
+        padding: 20px;
+    }
+
+    section {
+        padding: 15px;
+    }
+
+    .skill-list span {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+
+    .social-links a {
+        width: 35px;
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .footer {
+        padding: 10px 0;
+        font-size: 14px;
+    }
+}
+
+/* For screens smaller than 480px (e.g., small phones) */
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    .header_logo {
+        font-size: 20px;
+    }
+
+    .nav ul li a {
+        font-size: 16px;
+    }
+
+    .header_button button {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    .author__heading {
+        font-size: 24px;
+    }
+
+    .author p {
+        font-size: 1rem;
+    }
+
+    .articles h2 {
+        font-size: 20px;
+    }
+
+    .articles-ul li {
+        padding: 15px;
+    }
+
+    .profile-header h1 {
+        font-size: 24px;
+    }
+
+    .profile-header p {
+        font-size: 16px;
+    }
+
+    .profile-header img {
+        height: 120px;
+        width: 120px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .skill-list span {
+        font-size: 10px;
+        padding: 6px 10px;
+    }
+
+    .social-links a {
+        width: 30px;
+        height: 30px;
+        font-size: 16px;
+    }
+
+    .footer {
+        font-size: 12px;
     }
 }
