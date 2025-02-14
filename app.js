@@ -41,4 +41,6 @@ app.use('/', require('./server/routes/main'))
 app.use('/', require('./server/routes/admin'))
 
 
-module.exports = app;
+app.listen(PORT, () => {
+    console.log(`app listening on port http://localhost:${PORT}`);
+})
