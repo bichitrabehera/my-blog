@@ -30,6 +30,7 @@ app.use(session({
 }))
 
 app.use(express.static('public'))
+app.get('/favicon.ico', (req, res) => res.status(204).end());
 
 //template engine
 
@@ -44,3 +45,6 @@ app.use('/', require('./server/routes/admin'))
 app.listen(PORT, () => {
     console.log(`app listening on port http://localhost:${PORT}`);
 })
+
+module.exports = app;
+module.exports.handler = serverless(app);
