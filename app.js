@@ -5,6 +5,8 @@ const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser')
 const MongoStore = require('connect-mongo')
 const session = require('express-session')
+const serverless = require("serverless-http");
+
 const app = express();
 const PORT = process.env.PORT || 5000
 
@@ -39,6 +41,5 @@ app.use('/', require('./server/routes/main'))
 app.use('/', require('./server/routes/admin'))
 
 
-app.listen(PORT, () => {
-    console.log(`app listening on port http://localhost:${PORT}`);
-})
+module.exports = app;
+module.exports.handler = serverless(app);
