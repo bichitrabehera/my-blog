@@ -6,9 +6,12 @@
 <ul class="admin-posts">
     <% data.forEach(post=> { %>
         <li>
-            <a href="/post/<%= post._id %>">
-                <%= post.title %> &nearr;
-            </a>
+            <div class="admin-post-controls">
+
+                <a href="/post/<%= post._id %>">
+                    <%= post.title %> &nearr;
+                </a>
+            </div>
             <div class="admin-post-controls">
                 <a href="/edit-post/<%= post._id %>" class="btn">Edit</a>
                 <form action="/delete-post/<%= post._id %>?_method=DELETE" method="post">
