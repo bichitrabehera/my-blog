@@ -17,6 +17,7 @@ body {
     padding: 0;
     background-color: #f4f7fc;
     text-align: center;
+    margin: 0 auto;
 }
 
 a {
@@ -37,12 +38,11 @@ a {
 }
 
 .header_logo {
-    font-size: 24px;
+    font-size: 40px;
     font-weight: bold;
     text-decoration: none;
-    color: rgb(0, 0, 0);
+    color: rgb(0, 150, 25);
 }
-
 
 .nav ul {
     list-style: none;
@@ -58,7 +58,7 @@ a {
 }
 
 .nav ul li a:hover {
-    color: rgb(81, 151, 231);
+    color: #28a745; /* Green hover color */
 }
 
 .header_button {
@@ -67,7 +67,7 @@ a {
     gap: 10px;
 }
 
-/* SeachBar */
+/* SearchBar */
 .searchBar {
     visibility: hidden;
     transform: translateY(-100px);
@@ -79,7 +79,6 @@ a {
     border-bottom: 1px solid black;
 }
 
-
 .searchBar.open {
     transform: translateY(0);
     transition: transform 0.1s;
@@ -88,7 +87,6 @@ a {
 .searchBar input {
     padding: 12px;
     width: 100%;
-    /* background-color: rgb(163, 224, 255); */
     margin: 0;
     border: 0;
     border-radius: 10px;
@@ -97,16 +95,18 @@ a {
 
 #searchClose {
     position: absolute;
-    top: 0;
+    top: 1;
     right: 0;
     color: rgb(0, 0, 0);
-    padding: 30px;
+    padding: 10px;
     cursor: pointer;
+    border-radius: 10px;
+    background-color: #218838;
 }
 
 .header_button button {
     padding: 10px;
-    background-color: #1b89ff;
+    background-color: #28a745; /* Green button */
     color: white;
     border: none;
     border-radius: 50px;
@@ -126,7 +126,7 @@ a {
 /* ==================== */
 .author {
     text-align: center;
-    margin: 10px auto;
+    margin: 2rem auto;
     max-width: 80%;
 }
 
@@ -138,11 +138,9 @@ a {
 }
 
 .author p {
-    font-size: 1.4rem;
+    font-size: 1rem;
     color: #000000;
 }
-
-
 
 /* ==================== */
 /* HERO IMAGE */
@@ -155,7 +153,6 @@ a {
     max-width: 100%;
     height: auto;
 }
-
 
 /* ==================== */
 /* POST SECTION */
@@ -180,7 +177,6 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
-
 
 /* ==================== */
 /* ARTICLES SECTION */
@@ -229,7 +225,7 @@ h1 {
 }
 
 .articles-ul li a:hover {
-    color: #0073e6;
+    color: #28a745; /* Green hover color */
 }
 
 .articles-list_date {
@@ -244,7 +240,7 @@ h1 {
     display: inline-block;
     margin-top: 20px;
     padding: 10px 20px;
-    background: #5197e7;
+    background: #28a745; /* Green pagination */
     color: white;
     text-decoration: none;
     border-radius: 5px;
@@ -252,7 +248,7 @@ h1 {
 }
 
 .pagination:hover {
-    background: #d87212;
+    background: #218838; /* Darker green hover */
 }
 
 /* ==================== */
@@ -261,7 +257,7 @@ h1 {
 .profile-header {
     display: flex;
     justify-content: space-evenly;
-    background: linear-gradient(135deg, #0073e6, #004a99);
+    background: linear-gradient(135deg, #28a745, #218838); /* Green gradient */
     color: white;
     padding: 50px 20px;
     border-radius: 0 0 50px 50px;
@@ -286,7 +282,6 @@ h1 {
     height: 200px;
     width: 200px;
     border-bottom-left-radius: 30px;
-
 }
 
 /* ==================== */
@@ -299,12 +294,9 @@ main {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    /* padding: 30px; */
     padding-bottom: 50px;
     flex: 1;
-    /* Pushes footer to the bottom when content is short */
     margin-top: 0;
-
 }
 
 section {
@@ -328,35 +320,17 @@ section {
 
 .social-list a i {
     font-size: 30px;
-    color: #0073e6;
+    color: #28a745; /* Green social icons */
     transition: transform 0.3s ease-in-out;
 }
 
 h2 {
-    color: #0073e6;
+    color: #28a745; /* Green heading */
     font-size: 22px;
-    border-bottom: 3px solid #0073e6;
+    border-bottom: 3px solid #28a745; /* Green border */
     padding-bottom: 8px;
     margin-bottom: 15px;
 }
-
-/* ==================== */
-/* EDUCATION SECTION */
-/* ==================== */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* ul li {
-    padding: 10px 0;
-    font-size: 16px;
-    border-left: 4px solid #0073e6;
-    padding-left: 12px;
-    margin-bottom: 5px;
-    background: rgba(0, 115, 230, 0.1);
-    border-radius: 5px;
-} */
 
 /* ==================== */
 /* SKILLS SECTION */
@@ -369,7 +343,7 @@ ul {
 }
 
 .skill-list span {
-    background: #0073e6;
+    background: #28a745; /* Green skill tags */
     color: white;
     padding: 10px 14px;
     border-radius: 6px;
@@ -380,9 +354,8 @@ ul {
 
 .skill-list span:hover {
     transform: scale(1.1);
-    background: #004a99;
+    background: #218838; /* Darker green hover */
 }
-
 
 /* ==================== */
 /* Social Section */
@@ -405,34 +378,33 @@ ul {
     align-items: center;
     width: 40px;
     height: 40px;
-    background: #0073e6;
-    /* Primary Blue */
+    background: #28a745; /* Green social icons */
     color: white;
     font-size: 22px;
     border-radius: 50%;
     transition: all 0.3s ease-in-out;
     text-decoration: none;
-    box-shadow: 0 4px 6px rgba(0, 115, 230, 0.2);
+    box-shadow: 0 4px 6px rgba(40, 167, 69, 0.2); /* Green shadow */
 }
 
 .social-links a:hover {
-    background: #004a99;
+    background: #218838; /* Darker green hover */
     transform: scale(1.1);
-    box-shadow: 0 6px 10px rgba(0, 115, 230, 0.3);
+    box-shadow: 0 6px 10px rgba(40, 167, 69, 0.3); /* Green shadow */
 }
 
 /* ==================== */
 /* CONTACT SECTION */
 /* ==================== */
 .contact a {
-    color: #0073e6;
+    color: #28a745; /* Green contact links */
     text-decoration: none;
     font-weight: bold;
     transition: color 0.3s ease-in-out;
 }
 
 .contact a:hover {
-    color: #004a99;
+    color: #218838; /* Darker green hover */
     text-decoration: underline;
 }
 
@@ -444,7 +416,6 @@ ul {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -456,7 +427,6 @@ ul {
         opacity: 0;
         transform: translateY(-20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -468,7 +438,6 @@ ul {
         opacity: 0;
         transform: translateY(20px);
     }
-
     to {
         opacity: 1;
         transform: translateY(0);
@@ -489,6 +458,7 @@ ul {
     padding: 0;
     margin: 0;
 }
+
 .admin-post-controls form {
     display: inline-block;
 }
@@ -512,10 +482,9 @@ ul {
     margin-bottom: 5px;
     border: 1px solid rgba(0, 0, 0, 0.295);
     border-radius: 10px;
-
 }
 
-.admin-posts li a{
+.admin-posts li a {
     align-items: center;
 }
 
@@ -535,7 +504,6 @@ ul {
 /* ==================== */
 /* ADMIN SIGN-IN FORM */
 /* ==================== */
-/* Form Container */
 .admin-signin {
     background: white;
     padding: 30px;
@@ -546,14 +514,12 @@ ul {
     margin: 0 auto;
 }
 
-/* Form Heading */
 h1 {
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
 }
 
-/* Label Styles */
 label {
     display: block;
     text-align: left;
@@ -562,7 +528,6 @@ label {
     color: #333;
 }
 
-/* Input Fields */
 input[type="text"],
 input[type="password"] {
     width: 100%;
@@ -573,20 +538,18 @@ input[type="password"] {
     font-size: 16px;
 }
 
-/* Focus Effect on Inputs */
 input[type="text"]:focus,
 input[type="password"]:focus {
     outline: none;
-    border-color: #0073e6;
-    box-shadow: 0 0 5px rgba(0, 115, 230, 0.3);
+    border-color: #28a745; /* Green focus border */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.3); /* Green shadow */
 }
 
-/* Submit Button */
 .btn {
     width: 100px;
     padding: 10px;
     margin-top: 15px;
-    background: #0073e6;
+    background: #28a745; /* Green button */
     color: white;
     border: none;
     border-radius: 5px;
@@ -596,9 +559,8 @@ input[type="password"]:focus {
 }
 
 .btn:hover {
-    background: #005bb5;
+    background: #218838; /* Darker green hover */
 }
-
 
 /* ==================== */
 /* FOOTER */
@@ -618,13 +580,13 @@ input[type="password"]:focus {
 }
 
 .footer a {
-    color: #f4a261;
+    color: #28a745; /* Green footer links */
     text-decoration: none;
     font-weight: bold;
 }
 
 .footer a:hover {
-    color: #e76f51;
+    color: #218838; /* Darker green hover */
 }
 
 /* ==================== */
@@ -643,7 +605,7 @@ input[type="password"]:focus {
         gap: 10px;
     }
 
-    .artilces-ul li a {
+    .articles-ul li a {
         flex-direction: column;
         align-items: flex-start;
     }
@@ -671,12 +633,6 @@ input[type="password"]:focus {
     }
 }
 
-
-/* ==================== */
-/* RESPONSIVE DESIGN */
-/* ==================== */
-
-/* For screens smaller than 1200px (e.g., tablets) */
 @media (max-width: 1200px) {
     .header {
         padding: 10px 50px;
@@ -708,13 +664,11 @@ input[type="password"]:focus {
     }
 }
 
-/* For screens smaller than 768px (e.g., small tablets and large phones) */
 @media (max-width: 768px) {
-
     .addpost {
         width: 320px;
     }
-    
+
     .header {
         display: flex;
         flex-direction: row;
@@ -727,10 +681,6 @@ input[type="password"]:focus {
         flex-direction: row;
         gap: 10px;
         padding: 10px 0;
-    }
-
-    .header_button {
-        margin-top: 10px;
     }
 
     .author__heading {
@@ -788,14 +738,13 @@ input[type="password"]:focus {
     }
 }
 
-/* For screens smaller than 480px (e.g., small phones) */
 @media (max-width: 480px) {
     .header {
         padding: 10px;
     }
 
     .header_logo {
-        font-size: 20px;
+        font-size: 30px;
     }
 
     .nav ul li a {

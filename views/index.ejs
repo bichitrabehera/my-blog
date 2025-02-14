@@ -1,15 +1,16 @@
 <div class="author">
-    <h1 class="author__heading">Hey,I am Bichitra Behera</h1>
-    <p>A Web Developer</p>
+    <h1 class="author__heading">
+        <h1>Hey, I am Bichitra Behera</h1>
+        <p>A Web Developer sharing insights on development.</p>
+        <p>Explore my latest posts, tutorials, and experiences in web development.</p>
 </div>
 
-<img src="/images/banner.png"
-    alt="Hero image" class="hero-image" width="400" height="200" style="opacity: 1;"/>
+<img src="/images/banner.png" alt="Hero image" class="hero-image" width="350" height="100" style="opacity: 0.9;" />
 
-    <q>If you can't be a flower, don't be the thorn that hurts—be the leaf that shelters or the root that supports.</q>
+<q>If you can't be a flower, don't be the thorn that hurts—be the leaf that shelters or the root that supports.</q>
+
 <section class="articles">
     <h2>Latest Posts</h2>
-
     <ul class="articles-ul">
         <% data.forEach(post=> { %>
             <li>
@@ -25,9 +26,7 @@
             <% }); %>
     </ul>
 
-    <% if (nextPage!==null) { %>
-
+    <% if (nextPage !==null) { %>
         <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
         <% } %>
-
 </section>
