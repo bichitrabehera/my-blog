@@ -3,16 +3,16 @@ const express = require('express');
 const expressLayout = require('express-ejs-layouts');
 const methodOverride = require('method-override');
 const cookieParser = require('cookie-parser');
-const MongoStore = require('connect-mongo');
 const session = require('express-session');
-const serverless = require("serverless-http");
+const MongoStore = require('connect-mongo');
+const serverless = require('serverless-http');
 
 const app = express();
 const connectDB = require('./server/config/db');
 
 // Connect to DB
 connectDB()
-  .then(() => console.log("MongoDB Connected"))
+  .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
 
 // Middleware
@@ -21,15 +21,19 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(methodOverride('_method'));
 
+// Session store
+const sessionStore = MongoStore.create({
+  mongoUrl: process.env.MONGODB_URI,
+});
+
 app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    store: MongoStore.create({
-        mongoUrl: process.env.MONGODB_URI
-    })
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: true,
+  store: sessionStore,
 }));
 
+// Static files
 app.use(express.static('public'));
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
