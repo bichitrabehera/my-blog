@@ -9,11 +9,8 @@ const connectDB = async () => {
     }
 
     try {
-        mongoose.set('strictQuery', false);
-        const con = await mongoose.connect(process.env.MONGODB_URI, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true,
-        });
+        mongoose.set('strictQuery', true);
+        const con = await mongoose.connect(process.env.MONGODB_URI);
 
         isConnected = con.connections[0].readyState === 1; // Check if connected
         console.log(`MongoDB connected: ${con.connection.host}`);
