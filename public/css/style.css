@@ -25,6 +25,11 @@ a {
     color: rgb(0, 0, 0);
 }
 
+.design-header-footer{
+    height: 10px;
+    background-color: #218838;
+}
+
 /* ==================== */
 /* HEADER STYLES */
 /* ==================== */
