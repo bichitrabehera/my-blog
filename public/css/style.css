@@ -26,8 +26,8 @@ a {
 }
 
 .design-header-footer{
-    height: 10px;
-    background-color: #218838;
+    height: 12px;
+    background: linear-gradient(90deg,green,rgb(0, 58, 8),green);
 }
 
 /* ==================== */
@@ -173,10 +173,11 @@ h1 {
 }
 
 .article {
-    max-width: 600px;
+    width: 600px;
+    min-height: 300px;
     margin: 0 auto;
     padding: 1.5rem;
-    font-size: 1.1rem;
+    font-size: 1rem;
     line-height: 1.6;
     color: #444;
     background: #f9f9f9;
@@ -641,6 +642,10 @@ footer p {
 
 .social-links a:hover {
     color: #000000;
+}
+
+textarea{
+    padding: 10px;
 }
 
 /* Responsive Design */
