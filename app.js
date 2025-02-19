@@ -6,7 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const serverless = require('serverless-http');
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 10000;
 
 const app = express();
 const connectDB = require('./server/config/db');
