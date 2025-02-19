@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const serverless = require('serverless-http');
+const port = process.env.PORT || 3000;
 
 const app = express();
 const connectDB = require('./server/config/db');
@@ -46,6 +47,7 @@ app.set('view engine', 'ejs');
 app.use('/', require('./server/routes/main'));
 app.use('/', require('./server/routes/admin'));
 
-// Export as Serverless Function for Vercel
-module.exports = app;
-module.exports.handler = serverless(app);
+
+app.listen(port, () => {
+  console.log(`Server running on http://localhost:${port}`);
+});
