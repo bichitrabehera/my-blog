@@ -25,9 +25,9 @@ a {
     color: rgb(0, 0, 0);
 }
 
-.design-header-footer{
+.design-header-footer {
     height: 12px;
-    background: linear-gradient(90deg,green,rgb(0, 58, 8),green);
+    background: linear-gradient(90deg, green, rgb(0, 58, 8), green);
 }
 
 /* ==================== */
@@ -185,6 +185,7 @@ h1 {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: left;
 }
+
 
 /* ==================== */
 /* ARTICLES SECTION */
@@ -644,7 +645,7 @@ footer p {
     color: #000000;
 }
 
-textarea{
+textarea {
     padding: 10px;
 }
 
@@ -709,6 +710,13 @@ textarea{
     .skill-list span {
         font-size: 12px;
         padding: 8px 12px;
+    }
+
+    .article {
+        width: 100%;
+        min-height: 300px;
+        font-size: 0.9rem;
+        padding: 10px;
     }
 }
 
