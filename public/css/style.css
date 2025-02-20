@@ -169,9 +169,9 @@ a {
 /* ==================== */
 /* POST SECTION */
 /* ==================== */
-h1 {
-    font-size: 2rem;
-    width: 600px;
+.article h1 {
+    font-size: 1.7rem;
+    max-width: 600px;
     margin: 0 auto;
     font-weight: bold;
     text-align: left;
@@ -545,6 +545,7 @@ h2 {
 }
 
 .admin-only{
+    display: inline-flex;
     font-size: 24px;
     margin-bottom: 20px;
     color: #333;
@@ -624,6 +625,7 @@ footer p {
 }
 
 .footer-links a {
+    font-size: 1rem;
     color: #22a800;
     margin: 0 15px;
     text-decoration: none;
@@ -642,7 +644,7 @@ footer p {
 .social-links a {
     color: #fff;
     margin: 0 10px;
-    font-size: 17px;
+    font-size: 20px;
     transition: 0.3s;
 }
 
@@ -807,6 +809,7 @@ textarea {
     main {
         width: 100%;
         padding: 20px;
+        min-height: 60vh;
     }
 
     section {
@@ -819,14 +822,22 @@ textarea {
     }
 
     .social-links a {
-        width: 35px;
-        height: 35px;
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+    }
+
+    .social-links a i{
         font-size: 18px;
     }
 
     .footer {
         padding: 10px 0;
         font-size: 14px;
+    }
+
+    .footer p{
+        font-size: 1rem;
     }
 }
 
