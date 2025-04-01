@@ -5,9 +5,87 @@
 
 <form action="/add-post" method="post" class="addpost">
     <label for="title"><b>Title</b></label>
-    <input type="text" name="title" id="title" placeholder="Title">
+    <input type="text" name="title" id="title" placeholder="Title" required>
 
     <label for="body"><b>Content</b></label>
-    <textarea name="body" id="" cols="50" rows="10"></textarea>
+    <textarea name="body" id="blog-content" cols="50" rows="10" placeholder="Paste your content here..."></textarea>
+    
+    <!-- Preview section -->
+    <div class="preview-title">Preview:</div>
+    <div id="content-preview" class="content-preview"></div>
+    
     <input type="submit" value="Add" class="btn">
 </form>
+
+<style>
+    #blog-content {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-family: inherit;
+        margin-bottom: 10px;
+        white-space: pre; /* Preserve ALL spaces and line breaks exactly */
+    }
+    
+    .content-preview {
+        border: 1px solid #eee;
+        padding: 15px;
+        margin-top: 10px;
+        border-radius: 4px;
+        background: #f9f9f9;
+        min-height: 100px;
+        white-space: pre-wrap; /* Preserve spaces but wrap text */
+        font-family: monospace; /* Makes spaces more visible */
+    }
+    
+    .preview-title {
+        font-weight: bold;
+        margin-top: 15px;
+    }
+    
+    .content-preview p {
+        margin: 0;
+        white-space: pre-wrap;
+    }
+    
+    .content-preview a {
+        color: #0a66c2;
+        text-decoration: none;
+        word-break: break-all; /* Prevent long URLs from breaking layout */
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const textarea = document.getElementById('blog-content');
+        const preview = document.getElementById('content-preview');
+        
+        // Function to preserve ALL formatting including empty spaces
+        function preserveFormatting(text) {
+            // Convert all spaces to &nbsp; (non-breaking spaces)
+            let formatted = text.replace(/ /g, '&nbsp;');
+            
+            // Convert newlines to <br> tags
+            formatted = formatted.replace(/\n/g, '<br>');
+            
+            // Make URLs clickable
+            const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            return formatted.replace(urlRegex, function(url) {
+                return '<a href="' + url + '" target="_blank">' + url + '</a>';
+            });
+        }
+        
+        // Update preview in real-time
+        textarea.addEventListener('input', function() {
+            preview.innerHTML = preserveFormatting(textarea.value);
+        });
+        
+        // Format content before submission
+        document.querySelector('.addpost').addEventListener('submit', function(e) {
+            // Convert back to regular spaces for storage
+            const contentToSave = textarea.value;
+            textarea.value = contentToSave;
+        });
+    });
+</script>

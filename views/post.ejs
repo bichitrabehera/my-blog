@@ -1,7 +1,39 @@
 <article class="article">
-    <h1>
-        <%= data.title %>
-    </h1>
+  <h1 class="article-title"><%= data.title %></h1>
 
-    <%= data.body %>
+  <div class="article-content"><%- data.body %></div>
 </article>
+
+<style>
+  .article-content {
+    white-space: pre-wrap; /* This is the key line - preserves spaces and line breaks */
+    word-wrap: break-word;
+    font-family: inherit;
+    line-height: 1.6;
+    font-size: 1.1rem;
+    color: #333;
+  }
+
+  .article-content p {
+    margin-bottom: 1.5em;
+  }
+
+  .article-content a {
+    color: #0a66c2;
+    text-decoration: none;
+  }
+
+  .article-content a:hover {
+    text-decoration: underline;
+  }
+
+  .article-content ul,
+  .article-content ol {
+    margin: 1em 0;
+    padding-left: 2em;
+  }
+
+  .article-content li {
+    margin-bottom: 0.5em;
+  }
+</style>

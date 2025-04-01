@@ -1,34 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title><%= locals.title %></title>
+    <meta name="description" content="<%= locals.description %>" />
+    <link rel="icon" type="image/png" href="/images/images.png" />
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        <%= locals.title %>
-    </title>
-    <meta name="description" content="<%= locals.description %>">
-    <link rel="icon" type="image/png" href="/images/images.png">
-
-    <link rel="stylesheet" href="/css/style.css">
-    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/style.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css"
+      rel="stylesheet"
+    />
     <script src="/js/script.js" defer></script>
-    
-</head>
+  </head>
 
-<body>
-
+  <body>
     <div class="container">
-        <%- include('../partials/design.ejs') %>
-
-            <%- include('../partials/header_admin.ejs') %>
-                <main>
-                    <%- body %>
-                </main>
-                <%- include('../partials/footer.ejs') %>
-                    <%- include('../partials/design.ejs') %>
-
+      <%- include('../partials/header_admin.ejs') %>
+      <main><%- body %></main>
     </div>
-</body>
-
+  </body>
 </html>

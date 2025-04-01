@@ -1,32 +1,25 @@
-<div class="author">
-    <h1 class="author__heading">
-        <h1>Hey, I am Bichitra Behera</h1>
-        <p>A Web Developer sharing insights on development.</p>
-        <p>Explore my latest posts, tutorials, and experiences in web development.</p>
+<div class="author">  
+  <p>Passionate Web Developer sharing insights, tips, and experiences.</p>  
+  <p>Dive into my latest tutorials, projects, and development journeys.</p>  
 </div>
 
-<img src="/images/banner.png" alt="Hero image" class="hero-image" width="350" height="100" style="opacity: 0.9;" />
-
-<q>If you can't be a flower, don't be the thorn that hurts—be the leaf that shelters or the root that supports.</q>
 
 <section class="articles">
-    <h2>Latest Posts</h2>
-    <ul class="articles-ul">
-        <% data.forEach(post=> { %>
-            <li>
-                <a href="/post/<%= post._id %>">
-                    <span>
-                        <%= post.title %>
-                    </span>
-                    <span class="articles-list_date">
-                        <%= post.createdAt.toDateString() %>
-                    </span>
-                </a>
-            </li>
-            <% }); %>
-    </ul>
+  <h2>Latest Posts</h2>
+  <ul class="articles-ul">
+    <% data.forEach(post=> { %>
+    <li>
+      <a href="/post/<%= post._id %>">
+        <span> <%= post.title %> </span>
+        <span class="articles-list_date">
+          <%= post.createdAt.toDateString() %>
+        </span>
+      </a>
+    </li>
+    <% }); %>
+  </ul>
 
-    <% if (nextPage !==null) { %>
-        <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
-        <% } %>
+  <% if (nextPage !==null) { %>
+  <a href="/?page=<%= nextPage %>" class="pagination">&lt; View Older Posts</a>
+  <% } %>
 </section>
