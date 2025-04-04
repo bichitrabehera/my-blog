@@ -1,25 +1,163 @@
-<a href="/dashboard">&larr;</a>
+<a href="/dashboard">&larr; Back to Dashboard</a>
 <div class="admin-title">
-    <h2>Edit / View Post</h2>
-    <form action="/delete-post/<%= data._id %>?_method=DELETE" method="post">
-        <input type="submit" value="Delete" class="btn-delete btn">
-    </form>
+  <h2>Edit / View Post</h2>
+  <form action="/delete-post/<%= data._id %>?_method=DELETE" method="post">
+    <input type="submit" value="Delete" class="btn-delete btn">
+  </form>
 </div>
 
-<form action="/edit-post/<%= data._id %>?_method=PUT" method="post" class="addpost">
+<form action="/edit-post/<%- data._id %>?_method=PUT" method="post" class="addpost">
+  <label for="title"><b>Title</b></label>
+  <input type="text" name="title" id="title" placeholder="Title" value="<%= data.title %>" required>
 
-    <label for="title"><b>Title</b></label>
-    <input type="text" name="title" id="title" placeholder="Title" value="<%= data.title %>">
+  <label for="body"><b>Content</b></label>
+  <div class="editor-container">
+    <div 
+      id="blog-editor" 
+      class="blog-editor"
+      contenteditable="true"
+      data-placeholder="Edit your post here..."
+    ><%= data.body %></div>
+    <textarea name="body" id="blog-content" style="display:none;"><%= data.body %></textarea>
+  </div>
 
-    <label for="body"><b>Content</b></label>
-    <textarea name="body" id="" cols="50" rows="10"><%= data.body %></textarea>
+  <!-- Preview section -->
+  <div class="preview-title">Preview:</div>
+  <div id="content-preview" class="content-preview"><%= data.body %></div>
 
-    <input type="submit" value="Update" class="btn">
-
+  <input type="submit" value="Update" class="btn">
 </form>
 
 <style>
-    textarea{
-        min-height: 300px;
-    }
+  .admin-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .btn-delete {
+    background-color: #ff4444;
+  }
+  
+  .btn-delete:hover {
+    background-color: #cc0000;
+  }
+  
+  .editor-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .blog-editor {
+    min-height: 300px;
+    outline: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    padding: 10px;
+  }
+  
+  .blog-editor[data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: #888;
+    cursor: text;
+  }
+  
+  .content-preview {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background: #f9f9f9;
+    min-height: 100px;
+    white-space: pre-wrap;
+  }
+  
+  .content-preview a {
+    color: #0a66c2;
+    text-decoration: none;
+    word-break: break-all;
+  }
+  
+  .preview-title {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #0a66c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+  
+  .btn:hover {
+    background: #094d8f;
+  }
+  form{
+    display: flex;
+  }
 </style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const editor = document.getElementById("blog-editor");
+    const hiddenTextarea = document.getElementById("blog-content");
+    const preview = document.getElementById("content-preview");
+    
+    // Function to detect and convert URLs to clickable links
+    function createClickableLinks(text) {
+      const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]|\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, function(url) {
+        let href = url.startsWith("www.") ? "http://" + url : url;
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      });
+    }
+    
+    // Function to preserve formatting including spaces and line breaks
+    function preserveFormatting(text) {
+      return text.replace(/\n/g, '<br>');
+    }
+    
+    // Initialize preview with existing content
+    preview.innerHTML = createClickableLinks(editor.innerHTML);
+    
+    // Update preview in real-time
+    editor.addEventListener("input", function() {
+      const html = editor.innerHTML;
+      preview.innerHTML = createClickableLinks(html);
+    });
+    
+    // Format content before submission
+    document.querySelector(".addpost").addEventListener("submit", function(e) {
+      // Get the HTML content with preserved formatting
+      const contentHtml = editor.innerHTML;
+      
+      // Create a temporary div to extract text content
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = contentHtml;
+      
+      // Convert links back to plain text for storage
+      const links = tempDiv.querySelectorAll('a');
+      links.forEach(link => {
+        link.replaceWith(link.textContent);
+      });
+      
+      // Store the processed content
+      hiddenTextarea.value = tempDiv.innerHTML;
+    });
+    
+    // Handle paste events to clean up pasted content
+    editor.addEventListener("paste", function(e) {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData("text/plain");
+      document.execCommand("insertText", false, text);
+    });
+  });
+</script>

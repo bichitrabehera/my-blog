@@ -9,13 +9,13 @@
 
   <label for="body"><b>Content</b></label>
   <div class="editor-container">
-    <div 
-      id="blog-editor" 
+    <div
+      id="blog-editor"
       class="blog-editor"
       contenteditable="true"
       data-placeholder="Write your post here..."
     ></div>
-    <textarea name="body" id="blog-content" style="display:none;"></textarea>
+    <textarea name="body" id="blog-content" style="display: none"></textarea>
   </div>
 
   <!-- Preview section -->
@@ -26,55 +26,71 @@
 </form>
 
 <style>
-  .editor-container {
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    padding: 10px;
-    margin-bottom: 15px;
-  }
-  
-  .blog-editor {
-    min-height: 200px;
-    outline: none;
-    white-space: pre-wrap;
-    word-wrap: break-word;
-  }
-  
-  .blog-editor[data-placeholder]:empty:before {
-    content: attr(data-placeholder);
-    color: #888;
-    cursor: text;
-  }
-  
+    /* Container for the text editor */
+.editor-container {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 15px;
+  max-width: 100%;
+  overflow: hidden; /* Prevents horizontal scrolling */
+}
+
+/* Editable blog editor area */
+.blog-editor {
+  min-height: 200px;
+  outline: none;
+  white-space: pre-wrap; /* Preserves spaces and line breaks */
+  overflow-wrap: anywhere; /* Ensures words break properly */
+  word-break: normal; /* Prevents breaking words unnaturally */
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  -ms-hyphens: auto;
+  padding: 10px;
+  font-family: inherit;
+  line-height: 1.5;
+  width: 100%;
+}
+
+/* Preview area styling */
+.content-preview {
+  overflow-wrap: anywhere; /* Breaks long words properly */
+  word-break: normal; /* Prevents awkward word splitting */
+  padding: 10px;
+}
+
+/* Submit button styling */
+.btn {
+  display: inline-block;
+  padding: 10px 15px;
+  font-size: 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.btn:hover {
+  background-color: #218838;
+}
+
+/* Enhanced mobile responsiveness */
+@media (max-width: 768px) {
+  .blog-editor,
   .content-preview {
-    border: 1px solid #eee;
-    padding: 15px;
-    margin-top: 10px;
-    border-radius: 4px;
-    background: #f9f9f9;
-    min-height: 100px;
-    white-space: pre-wrap;
+    font-size: 16px; /* Larger text for better readability */
+    min-height: 150px;
+    padding: 8px;
+    overflow-wrap: anywhere; /* Ensure words don't break awkwardly */
   }
-  
-  .content-preview a {
-    color: #0a66c2;
-    text-decoration: none;
-  }
-  
-  .preview-title {
-    font-weight: bold;
-    margin-top: 15px;
-  }
-  
+
   .btn {
-    margin-top: 15px;
-    padding: 10px 20px;
-    background: #0a66c2;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    width: 100%; /* Make button full width on mobile */
   }
+}
+
 </style>
 
 <script>
@@ -82,54 +98,57 @@
     const editor = document.getElementById("blog-editor");
     const hiddenTextarea = document.getElementById("blog-content");
     const preview = document.getElementById("content-preview");
-    
+
     // Function to detect and convert URLs to clickable links
     function createClickableLinks(text) {
       // Enhanced URL regex that catches most common URL patterns
-      const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]|\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
-      return text.replace(urlRegex, function(url) {
+      const urlRegex =
+        /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]|\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, function (url) {
         let href = url.startsWith("www.") ? "http://" + url : url;
         return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
       });
     }
-    
+
     // Function to preserve formatting including spaces and line breaks
     function preserveFormatting(text) {
-      return text.replace(/\n/g, '<br>');
+      return text.replace(/\n/g, "<br>");
     }
-    
+
     // Update preview in real-time
-    editor.addEventListener("input", function() {
+    editor.addEventListener("input", function () {
       const html = editor.innerHTML;
       preview.innerHTML = createClickableLinks(html);
     });
-    
+
     // Format content before submission
-    document.querySelector(".addpost").addEventListener("submit", function(e) {
+    document.querySelector(".addpost").addEventListener("submit", function (e) {
       // Get the HTML content with preserved formatting
       const contentHtml = editor.innerHTML;
-      
+
       // Create a temporary div to extract text content
-      const tempDiv = document.createElement('div');
+      const tempDiv = document.createElement("div");
       tempDiv.innerHTML = contentHtml;
-      
+
       // Convert links back to plain text for storage
-      const links = tempDiv.querySelectorAll('a');
-      links.forEach(link => {
+      const links = tempDiv.querySelectorAll("a");
+      links.forEach((link) => {
         link.replaceWith(link.textContent);
       });
-      
+
       // Store both HTML and plain text versions
       hiddenTextarea.value = tempDiv.innerHTML;
-      
+
       // Alternatively, you could store just the HTML:
       // hiddenTextarea.value = contentHtml;
     });
-    
+
     // Handle paste events to clean up pasted content
-    editor.addEventListener("paste", function(e) {
+    editor.addEventListener("paste", function (e) {
       e.preventDefault();
-      const text = (e.clipboardData || window.clipboardData).getData("text/plain");
+      const text = (e.clipboardData || window.clipboardData).getData(
+        "text/plain"
+      );
       document.execCommand("insertText", false, text);
     });
   });
