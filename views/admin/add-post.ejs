@@ -1,91 +1,136 @@
-<a href="/dashboard">&larr;</a>
+<a href="/dashboard">&larr; Back to Dashboard</a>
 <div class="admin-title">
-    <h2>Add New Post</h2>
+  <h2>Add New Post</h2>
 </div>
 
 <form action="/add-post" method="post" class="addpost">
-    <label for="title"><b>Title</b></label>
-    <input type="text" name="title" id="title" placeholder="Title" required>
+  <label for="title"><b>Title</b></label>
+  <input type="text" name="title" id="title" placeholder="Title" required />
 
-    <label for="body"><b>Content</b></label>
-    <textarea name="body" id="blog-content" cols="50" rows="10" placeholder="Paste your content here..."></textarea>
-    
-    <!-- Preview section -->
-    <div class="preview-title">Preview:</div>
-    <div id="content-preview" class="content-preview"></div>
-    
-    <input type="submit" value="Add" class="btn">
+  <label for="body"><b>Content</b></label>
+  <div class="editor-container">
+    <div 
+      id="blog-editor" 
+      class="blog-editor"
+      contenteditable="true"
+      data-placeholder="Write your post here..."
+    ></div>
+    <textarea name="body" id="blog-content" style="display:none;"></textarea>
+  </div>
+
+  <!-- Preview section -->
+  <div class="preview-title">Preview:</div>
+  <div id="content-preview" class="content-preview"></div>
+
+  <input type="submit" value="Add" class="btn" />
 </form>
 
 <style>
-    #blog-content {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        font-family: inherit;
-        margin-bottom: 10px;
-        white-space: pre; /* Preserve ALL spaces and line breaks exactly */
-    }
-    
-    .content-preview {
-        border: 1px solid #eee;
-        padding: 15px;
-        margin-top: 10px;
-        border-radius: 4px;
-        background: #f9f9f9;
-        min-height: 100px;
-        white-space: pre-wrap; /* Preserve spaces but wrap text */
-        font-family: monospace; /* Makes spaces more visible */
-    }
-    
-    .preview-title {
-        font-weight: bold;
-        margin-top: 15px;
-    }
-    
-    .content-preview p {
-        margin: 0;
-        white-space: pre-wrap;
-    }
-    
-    .content-preview a {
-        color: #0a66c2;
-        text-decoration: none;
-        word-break: break-all; /* Prevent long URLs from breaking layout */
-    }
+  .editor-container {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 10px;
+    margin-bottom: 15px;
+  }
+  
+  .blog-editor {
+    min-height: 200px;
+    outline: none;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+  }
+  
+  .blog-editor[data-placeholder]:empty:before {
+    content: attr(data-placeholder);
+    color: #888;
+    cursor: text;
+  }
+  
+  .content-preview {
+    border: 1px solid #eee;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 4px;
+    background: #f9f9f9;
+    min-height: 100px;
+    white-space: pre-wrap;
+  }
+  
+  .content-preview a {
+    color: #0a66c2;
+    text-decoration: none;
+  }
+  
+  .preview-title {
+    font-weight: bold;
+    margin-top: 15px;
+  }
+  
+  .btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    background: #0a66c2;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
 </style>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const textarea = document.getElementById('blog-content');
-        const preview = document.getElementById('content-preview');
-        
-        // Function to preserve ALL formatting including empty spaces
-        function preserveFormatting(text) {
-            // Convert all spaces to &nbsp; (non-breaking spaces)
-            let formatted = text.replace(/ /g, '&nbsp;');
-            
-            // Convert newlines to <br> tags
-            formatted = formatted.replace(/\n/g, '<br>');
-            
-            // Make URLs clickable
-            const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-            return formatted.replace(urlRegex, function(url) {
-                return '<a href="' + url + '" target="_blank">' + url + '</a>';
-            });
-        }
-        
-        // Update preview in real-time
-        textarea.addEventListener('input', function() {
-            preview.innerHTML = preserveFormatting(textarea.value);
-        });
-        
-        // Format content before submission
-        document.querySelector('.addpost').addEventListener('submit', function(e) {
-            // Convert back to regular spaces for storage
-            const contentToSave = textarea.value;
-            textarea.value = contentToSave;
-        });
+  document.addEventListener("DOMContentLoaded", function () {
+    const editor = document.getElementById("blog-editor");
+    const hiddenTextarea = document.getElementById("blog-content");
+    const preview = document.getElementById("content-preview");
+    
+    // Function to detect and convert URLs to clickable links
+    function createClickableLinks(text) {
+      // Enhanced URL regex that catches most common URL patterns
+      const urlRegex = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|]|\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/gi;
+      return text.replace(urlRegex, function(url) {
+        let href = url.startsWith("www.") ? "http://" + url : url;
+        return `<a href="${href}" target="_blank" rel="noopener noreferrer">${url}</a>`;
+      });
+    }
+    
+    // Function to preserve formatting including spaces and line breaks
+    function preserveFormatting(text) {
+      return text.replace(/\n/g, '<br>');
+    }
+    
+    // Update preview in real-time
+    editor.addEventListener("input", function() {
+      const html = editor.innerHTML;
+      preview.innerHTML = createClickableLinks(html);
     });
+    
+    // Format content before submission
+    document.querySelector(".addpost").addEventListener("submit", function(e) {
+      // Get the HTML content with preserved formatting
+      const contentHtml = editor.innerHTML;
+      
+      // Create a temporary div to extract text content
+      const tempDiv = document.createElement('div');
+      tempDiv.innerHTML = contentHtml;
+      
+      // Convert links back to plain text for storage
+      const links = tempDiv.querySelectorAll('a');
+      links.forEach(link => {
+        link.replaceWith(link.textContent);
+      });
+      
+      // Store both HTML and plain text versions
+      hiddenTextarea.value = tempDiv.innerHTML;
+      
+      // Alternatively, you could store just the HTML:
+      // hiddenTextarea.value = contentHtml;
+    });
+    
+    // Handle paste events to clean up pasted content
+    editor.addEventListener("paste", function(e) {
+      e.preventDefault();
+      const text = (e.clipboardData || window.clipboardData).getData("text/plain");
+      document.execCommand("insertText", false, text);
+    });
+  });
 </script>
