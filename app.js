@@ -11,6 +11,12 @@ const port = process.env.PORT || 10000;
 const app = express();
 const connectDB = require('./server/config/db');
 
+setInterval(() => {
+  axios.get('https://yourwebsite.com')
+    .then(() => console.log('Pinged self'))
+    .catch(err => console.log('Ping failed', err));
+}, 5 * 60 * 1000); // every 5 minutes
+
 // Connect to DB
 connectDB()
   .then(() => console.log('MongoDB Connected'))
